@@ -1,60 +1,46 @@
 package controle_matriculas.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import controle_matriculas.model.Turma;
+import controle_matriculas.domain.Turma;
+import controle_matriculas.repository.TurmaRepository;
 
 @RestController
 @RequestMapping("/turmas")
 public class TurmaController {
 
-    private List<Turma> turmas = new ArrayList<>();
+    @Autowired
+    private TurmaRepository turmaRepository;
 
     @GetMapping
     public List<Turma> getTurmas(){
-        return turmas;
+        return turmaRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Turma> getTurmaById(@PathVariable String id) {
-        for (Turma turma : turmas) {
-            if (turma.getId().equals(id))
-                return Optional.of(turma);
-        }
-
-        return Optional.empty();
+    public Optional<Turma> getTurmaById(@PathVariable Long id) {
+        return turmaRepository.findById(id);
     }
 
     @PostMapping
     public Turma createTurma(@RequestBody Turma turma) {
-        Turma newTurma = new Turma(turma.getName());
-        turma.add(newTurma);
-        return newTurma;
+        return turmaRepository.save(turma);
     }
 
     @PutMapping("/{id}")
-    public Turma updateTurma(@PathVariable("id") String id, @RequestBody Turma turma) {
-        int turmaIndex = -1;
-        Turma updatedTurma = new Turma(turma.getName());
-
-        for (Turma c : turmas) {
-            if (c.getId().equals(id)) {
-                turmaIndex = turmas.indexOf(c);
-                turmas.set(turmaIndex, updatedTurma);
-            }
-        }
-
-        return (turmaIndex == -1) ? createTurma(turma) : updatedTurma;
+    public Turma updateTurma(@PathVariable("id") Long id, @RequestBody Turma turma) {
+        return turmaRepository.save(turma);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTurma(@PathVariable String id) {
-        turmas.removeIf(c -> c.getId().equals(id));
+    public void deleteTurma(@PathVariable Long id) {
+        turmaRepository.delete(turmaRepository.findById(id).get());
     } 
     
 }
