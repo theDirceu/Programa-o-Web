@@ -25,7 +25,7 @@ public class TurmaMapper {
         return turma;
     }
 
-    
+   /*
     public TurmaWithAlunoDTO convertToTurmaWithAlunoDTO(Turma turma) {
         TurmaWithAlunoDTO turmaDTO = modelMapper.map(turma, TurmaWithAlunoDTO.class);
 
@@ -48,5 +48,5 @@ public class TurmaMapper {
         Turma turma = modelMapper.map(turmaDTO, Turma.class);
     
         return turma;
-    }
+    }*/
 }

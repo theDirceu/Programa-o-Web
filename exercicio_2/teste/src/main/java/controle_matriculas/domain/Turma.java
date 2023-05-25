@@ -1,5 +1,7 @@
 package controle_matriculas.domain;
 
+import java.sql.Time;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,14 +24,15 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "nome_turma")
-    private String nome_turma;
+    @Column(name = "name")
+    private String name;
 
-    public Turma(String name){
-        this.nome_turma = name;
-    }
+    @Column(name ="horario")
+    private Time horario;
 
-    public Object getName() {
-        return null;
+    public Turma(String name, Time horario) {
+        // this.id = UUID.randomUUID().toString();
+        this.name = name;
+        this.horario = horario;
     }
 }

@@ -50,4 +50,5 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                 .compact();
                 response.addHeader("Authorization","Bearer " + token);
     }
+
 }
