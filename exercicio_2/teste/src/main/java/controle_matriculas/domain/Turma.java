@@ -20,12 +20,16 @@ public class Turma {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
     @Column(name = "nome_turma")
     private String nome_turma;
 
     public Turma(String name){
         this.nome_turma = name;
+    }
+
+    public Object getName() {
+        return null;
     }
 }

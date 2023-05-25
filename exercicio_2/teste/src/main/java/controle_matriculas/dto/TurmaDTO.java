@@ -9,6 +9,8 @@ public class TurmaDTO {
 
     private String name;
 
+    private long id;
+
     private Time horario;
     
 }
