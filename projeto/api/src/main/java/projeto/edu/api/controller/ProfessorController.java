@@ -3,6 +3,7 @@ package projeto.edu.api.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import projeto.edu.api.aluno.DadosListagemAluno;
@@ -27,7 +28,7 @@ public class ProfessorController {
     }
 
     @GetMapping
-    public Page<DadosListagemProfessor> listar(Pageable paginacao){
+    public Page<DadosListagemProfessor> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
         return repository.findAll(paginacao).map(DadosListagemProfessor::new);
     }
 }
