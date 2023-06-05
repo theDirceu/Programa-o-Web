@@ -1,7 +1,9 @@
 package controle_matriculas.settings;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import io.jsonwebtoken.Jwts;
+
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,8 +44,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
             Authentication authResult) throws IOException {
-                String token = Jwts.builder()
-                                .setSubject(((User) authResult.getPrincipal()).getUsername())
+                String token = Jwts.builder().setSubject(((User) authResult.getPrincipal()).getUsername())
                                 .setIssuedAt(new Date(System.currentTimeMillis()))
                                 .setExpiration(new Date(System.currentTimeMillis() + 864_000_000))
                                 .signWith(SignatureAlgorithm.HS256, "UEPBProgWeb20202MySecretKeyToGenJWTsToken".getBytes())

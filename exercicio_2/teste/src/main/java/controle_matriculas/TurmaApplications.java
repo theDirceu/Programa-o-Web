@@ -9,5 +9,4 @@ public class TurmaApplications {
     public static void main(String[] args) {
 		SpringApplication.run(TurmaApplications.class, args);
 	}
-
 }

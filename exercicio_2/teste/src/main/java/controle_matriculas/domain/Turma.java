@@ -1,6 +1,7 @@
 package controle_matriculas.domain;
 
 import java.sql.Time;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,8 +31,8 @@ public class Turma {
     @Column(name ="horario")
     private Time horario;
 
-    public Turma(String name, Time horario) {
-        // this.id = UUID.randomUUID().toString();
+    public Turma(long id, String name, Time horario) {
+        this.id = id;
         this.name = name;
         this.horario = horario;
     }
