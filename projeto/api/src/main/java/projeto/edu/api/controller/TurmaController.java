@@ -8,6 +8,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import projeto.edu.api.turma.*;
 
 import java.util.List;
@@ -21,21 +22,29 @@ public class TurmaController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody DadosCadastroTurma dados){
-        repository.save(new Turma(dados));
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroTurma dados, UriComponentsBuilder uriBuilder){
+        var turma = new Turma(dados);
+        repository.save(turma);
+
+        var uri =  uriBuilder.path("/truma/{id}").buildAndExpand(turma.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoTurma(turma));
     }
 
     @GetMapping
-    public Page<Turma> lista(@PageableDefault(size = 10, sort = {"id"}) Pageable paginacao){
-        return repository.findAllByAtivoTrue(paginacao);
+    public ResponseEntity<Page<Turma>> lista(@PageableDefault(size = 10, sort = {"id"}) Pageable paginacao){
+        var page = repository.findAllByAtivoTrue(paginacao);
+        return ResponseEntity.ok(page);
     }
 
 
     @PutMapping
     @Transactional
-    public void atualizar(@RequestBody @Valid DadosAtualizarTurma dados){
+    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizarTurma dados){
         var turma = repository.getReferenceById(dados.id());
         turma.atualizarInfomacoes(dados);
+
+        return ResponseEntity.ok(new DadosDetalhamentoTurma(turma));
     }
 
     @DeleteMapping("/{id}")

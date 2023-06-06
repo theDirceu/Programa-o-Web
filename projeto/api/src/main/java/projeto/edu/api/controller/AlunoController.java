@@ -8,7 +8,10 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import projeto.edu.api.aluno.*;
+import projeto.edu.api.professor.DadosDetalhamentoProfessor;
+import projeto.edu.api.professor.Professor;
 
 import java.util.List;
 
@@ -21,20 +24,28 @@ public class AlunoController {
 
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody DadosCadastroAluno dados){
-        repository.save(new Aluno(dados));
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroAluno dados, UriComponentsBuilder uriBuilder){
+        var aluno = new Aluno(dados);
+        repository.save(aluno);
+
+        var uri =  uriBuilder.path("/aluno/{id}").buildAndExpand(aluno.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoAluno(aluno));
     }
 
     @GetMapping
-    public Page<DadosListagemAluno> listar(@PageableDefault(size = 10, sort = {"id"}) Pageable paginacao){
-        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemAluno::new);
+    public ResponseEntity<Page<DadosListagemAluno>> listar(@PageableDefault(size = 10, sort = {"id"}) Pageable paginacao){
+        var page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemAluno::new);
+        return ResponseEntity.ok(page);
     }
 
     @PutMapping
     @Transactional
-    public void atualizar(@RequestBody @Valid DadosAtualizarAluno dados){
+    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizarAluno dados){
         var aluno = repository.getReferenceById(dados.id());
         aluno.atualizarInfomacoes(dados);
+
+        return ResponseEntity.ok(new DadosDetalhamentoAluno(aluno));
     }
 
     @DeleteMapping("/{id}")

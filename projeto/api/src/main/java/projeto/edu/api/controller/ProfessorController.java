@@ -8,6 +8,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import projeto.edu.api.professor.*;
 
 import java.util.List;
@@ -21,8 +22,13 @@ public class ProfessorController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity cadastrar(@RequestBody DadosCadastroProfessor dados){
-        repository.save(new Professor(dados));
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosCadastroProfessor dados, UriComponentsBuilder uriBuilder){
+        var professor = new Professor(dados);
+        repository.save(professor);
+
+        var uri =  uriBuilder.path("/professor/{id}").buildAndExpand(professor.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoProfessor(professor));
     }
 
     @GetMapping
