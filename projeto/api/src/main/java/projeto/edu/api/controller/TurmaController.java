@@ -1,12 +1,13 @@
 package projeto.edu.api.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import projeto.edu.api.projeto.Projeto;
+import projeto.edu.api.turma.DadosAtualizarTurma;
 import projeto.edu.api.turma.DadosCadastroTurma;
 import projeto.edu.api.turma.Turma;
 import projeto.edu.api.turma.TurmaRepository;
@@ -29,5 +30,13 @@ public class TurmaController {
     @GetMapping
     public Page<Turma> lista(@PageableDefault(size = 10, sort = {"id"}) Pageable paginacao){
         return repository.findAll(paginacao);
+    }
+
+
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosAtualizarTurma dados){
+        var turma = repository.getReferenceById(dados.id());
+        turma.atualizarInfomacoes(dados);
     }
 }

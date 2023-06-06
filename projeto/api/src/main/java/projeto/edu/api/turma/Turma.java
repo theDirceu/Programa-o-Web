@@ -20,4 +20,10 @@ public class Turma {
         this.nome = dados.nome();
         this.sala = dados.sala();
     }
+
+    public void atualizarInfomacoes(DadosAtualizarTurma dados) {
+        if (dados.sala() !=null) {
+            this.sala = dados.sala();
+        }
+    }
 }

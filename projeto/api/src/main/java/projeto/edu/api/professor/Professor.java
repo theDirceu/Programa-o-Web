@@ -28,4 +28,16 @@ public class Professor {
         this.matricula = dados.matricula();
         this.funcao = dados.funcao();
     }
+
+    public void atualizarInfomacoes(DadosAtualizarProfessor dados) {
+        if (dados.nome() !=null) {
+            this.nome = dados.nome();
+        }
+        if (dados.funcao() != null) {
+            this.funcao = dados.funcao();
+        }
+        if (dados.formacao() != null) {
+            this.formacao = dados.formacao();
+        }
+    }
 }

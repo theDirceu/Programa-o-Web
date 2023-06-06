@@ -20,4 +20,10 @@ public class Projeto {
         this.nome = dados.nome();
         this.descricao = dados.descricao();
     }
+
+    public void atualizarInfomacoes(DadosAtualizarProjeto dados) {
+        if (dados.descricao() !=null) {
+            this.nome = dados.descricao();
+        }
+    }
 }

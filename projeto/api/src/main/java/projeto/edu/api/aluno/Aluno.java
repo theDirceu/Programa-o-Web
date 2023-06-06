@@ -26,4 +26,13 @@ public class Aluno {
         this.matricula = dados.matricula();
         this.funcao = dados.funcao();
     }
+
+    public void atualizarInfomacoes(DadosAtualizarAluno dados) {
+        if (dados.nome() !=null) {
+            this.nome = dados.nome();
+        }
+        if (dados.funcao() != null) {
+            this.funcao = dados.funcao();
+        }
+    }
 }
