@@ -16,7 +16,10 @@ public class Projeto {
     private String nome;
     private String descricao;
 
+    private Boolean ativo;
+
     public Projeto (DadosCadastroProjeto dados){
+        this.ativo = true;
         this.nome = dados.nome();
         this.descricao = dados.descricao();
     }
@@ -25,5 +28,9 @@ public class Projeto {
         if (dados.descricao() !=null) {
             this.nome = dados.descricao();
         }
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }

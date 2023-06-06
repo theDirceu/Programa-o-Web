@@ -21,7 +21,10 @@ public class Professor {
     @Enumerated(EnumType.STRING)
     private FuncoesProfessor funcao;
 
+    private Boolean ativo;
+
     public Professor(DadosCadastroProfessor dados) {
+        this.ativo = true;
         this.nome = dados.nome();
         this.email = dados.email();
         this.formacao = dados.formacao();
@@ -39,5 +42,9 @@ public class Professor {
         if (dados.formacao() != null) {
             this.formacao = dados.formacao();
         }
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }

@@ -5,12 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import projeto.edu.api.turma.DadosAtualizarTurma;
-import projeto.edu.api.turma.DadosCadastroTurma;
-import projeto.edu.api.turma.Turma;
-import projeto.edu.api.turma.TurmaRepository;
+import projeto.edu.api.turma.*;
 
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class TurmaController {
 
     @GetMapping
     public Page<Turma> lista(@PageableDefault(size = 10, sort = {"id"}) Pageable paginacao){
-        return repository.findAll(paginacao);
+        return repository.findAllByAtivoTrue(paginacao);
     }
 
 
@@ -38,5 +36,13 @@ public class TurmaController {
     public void atualizar(@RequestBody @Valid DadosAtualizarTurma dados){
         var turma = repository.getReferenceById(dados.id());
         turma.atualizarInfomacoes(dados);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity excluir(@PathVariable Long id){
+        var turma = repository.getReferenceById(id);
+        turma.excluir();
+        return ResponseEntity.noContent().build();
     }
 }

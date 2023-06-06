@@ -20,7 +20,10 @@ public class Aluno {
     @Enumerated(EnumType.STRING)
     private FuncoesAluno funcao;
 
+    private Boolean ativo;
+
     public Aluno(DadosCadastroAluno dados) {
+        this.ativo = true;
         this.nome = dados.nome();
         this.email = dados.email();
         this.matricula = dados.matricula();
@@ -34,5 +37,9 @@ public class Aluno {
         if (dados.funcao() != null) {
             this.funcao = dados.funcao();
         }
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }

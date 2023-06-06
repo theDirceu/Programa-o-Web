@@ -16,7 +16,10 @@ public class Turma {
     private String nome;
     private String sala;
 
+    private Boolean ativo;
+
     public Turma(DadosCadastroTurma dados){
+        this.ativo = true;
         this.nome = dados.nome();
         this.sala = dados.sala();
     }
@@ -25,5 +28,9 @@ public class Turma {
         if (dados.sala() !=null) {
             this.sala = dados.sala();
         }
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }
