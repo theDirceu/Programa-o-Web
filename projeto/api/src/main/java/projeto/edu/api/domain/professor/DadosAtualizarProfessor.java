@@ -1,4 +1,4 @@
-package projeto.edu.api.professor;
+package projeto.edu.api.domain.professor;
 
 import jakarta.validation.constraints.NotNull;
 

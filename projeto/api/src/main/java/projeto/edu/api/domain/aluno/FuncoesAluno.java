@@ -1,4 +1,4 @@
-package projeto.edu.api.aluno;
+package projeto.edu.api.domain.aluno;
 
 public enum FuncoesAluno {
 

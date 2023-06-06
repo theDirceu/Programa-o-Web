@@ -1,4 +1,4 @@
-package projeto.edu.api.turma;
+package projeto.edu.api.domain.turma;
 
 public record DadosDetalhamentoTurma(Long id, String nome, String sala) {
 

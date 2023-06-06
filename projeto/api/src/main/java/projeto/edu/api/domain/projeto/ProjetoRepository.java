@@ -1,4 +1,4 @@
-package projeto.edu.api.projeto;
+package projeto.edu.api.domain.projeto;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,4 +1,4 @@
-package projeto.edu.api.professor;
+package projeto.edu.api.domain.professor;
 
 
 public record DadosListagemProfessor(Long id, String nome, String email, String formacao, FuncoesProfessor funcao) {

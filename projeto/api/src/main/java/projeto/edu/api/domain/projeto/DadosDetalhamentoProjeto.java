@@ -1,4 +1,4 @@
-package projeto.edu.api.projeto;
+package projeto.edu.api.domain.projeto;
 
 public record DadosDetalhamentoProjeto(Long id, String nome, String descricao) {
 

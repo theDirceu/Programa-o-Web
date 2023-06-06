@@ -9,9 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import projeto.edu.api.turma.*;
-
-import java.util.List;
+import projeto.edu.api.domain.turma.*;
 
 @RestController
 @RequestMapping("turma")

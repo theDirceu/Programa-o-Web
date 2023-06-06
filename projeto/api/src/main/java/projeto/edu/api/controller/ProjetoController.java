@@ -9,13 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-import projeto.edu.api.professor.DadosDetalhamentoProfessor;
-import projeto.edu.api.professor.Professor;
-import projeto.edu.api.projeto.*;
-import projeto.edu.api.turma.DadosDetalhamentoTurma;
-
-
-import java.util.List;
+import projeto.edu.api.domain.projeto.*;
 
 @RestController
 @RequestMapping("projeto")

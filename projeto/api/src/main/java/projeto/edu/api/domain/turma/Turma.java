@@ -1,32 +1,32 @@
-package projeto.edu.api.projeto;
+package projeto.edu.api.domain.turma;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-@Table(name = "projetos")
-@Entity(name = "Projeto")
+@Table(name = "turmas")
+@Entity(name = "Turma")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of="id")
-public class Projeto {
+public class Turma {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
-    private String descricao;
+    private String sala;
 
     private Boolean ativo;
 
-    public Projeto (DadosCadastroProjeto dados){
+    public Turma(DadosCadastroTurma dados){
         this.ativo = true;
         this.nome = dados.nome();
-        this.descricao = dados.descricao();
+        this.sala = dados.sala();
     }
 
-    public void atualizarInfomacoes(DadosAtualizarProjeto dados) {
-        if (dados.descricao() !=null) {
-            this.nome = dados.descricao();
+    public void atualizarInfomacoes(DadosAtualizarTurma dados) {
+        if (dados.sala() !=null) {
+            this.sala = dados.sala();
         }
     }
 
