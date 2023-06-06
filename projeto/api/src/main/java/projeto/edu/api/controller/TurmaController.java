@@ -26,7 +26,7 @@ public class TurmaController {
         var turma = new Turma(dados);
         repository.save(turma);
 
-        var uri =  uriBuilder.path("/truma/{id}").buildAndExpand(turma.getId()).toUri();
+        var uri =  uriBuilder.path("/turma/{id}").buildAndExpand(turma.getId()).toUri();
 
         return ResponseEntity.created(uri).body(new DadosDetalhamentoTurma(turma));
     }
@@ -53,5 +53,11 @@ public class TurmaController {
         var turma = repository.getReferenceById(id);
         turma.excluir();
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable Long id){
+        var turma = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoTurma(turma));
     }
 }

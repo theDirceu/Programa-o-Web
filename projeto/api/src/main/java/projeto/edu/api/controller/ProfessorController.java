@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import projeto.edu.api.professor.*;
+import projeto.edu.api.turma.DadosDetalhamentoTurma;
 
 import java.util.List;
 
@@ -52,5 +53,11 @@ public class ProfessorController {
         var professor = repository.getReferenceById(id);
         professor.excluir();
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable Long id){
+        var professor = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoProfessor(professor));
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import projeto.edu.api.professor.DadosDetalhamentoProfessor;
 import projeto.edu.api.professor.Professor;
 import projeto.edu.api.projeto.*;
+import projeto.edu.api.turma.DadosDetalhamentoTurma;
 
 
 import java.util.List;
@@ -55,5 +56,11 @@ public class ProjetoController {
         var projeto = repository.getReferenceById(id);
         projeto.excluir();
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable Long id){
+        var projeto = repository.getReferenceById(id);
+        return ResponseEntity.ok(new DadosDetalhamentoProjeto(projeto));
     }
 }
