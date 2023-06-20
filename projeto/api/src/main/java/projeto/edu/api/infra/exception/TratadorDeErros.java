@@ -1,4 +1,4 @@
-package projeto.edu.api.infra;
+package projeto.edu.api.infra.exception;
 
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
