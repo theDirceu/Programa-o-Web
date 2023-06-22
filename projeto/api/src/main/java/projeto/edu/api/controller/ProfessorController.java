@@ -31,6 +31,8 @@ public class ProfessorController {
 
     @GetMapping
     public ResponseEntity<Page<DadosListagemProfessor>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao){
+
+
         var page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemProfessor::new);
         return ResponseEntity.ok(page);
     }
