@@ -1,4 +1,4 @@
-package br.uepb.edu.professorConsumer.config;
+package projeto.uepb.edu.professorConsumer.config;
 
 
 import org.springframework.amqp.core.Exchange;

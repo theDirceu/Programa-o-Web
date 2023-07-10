@@ -1,4 +1,4 @@
-package br.uepb.edu.alunoConsumer.config;
+package projeto.uepb.edu.alunoConsumer.config;
 
 
 import org.springframework.amqp.core.Exchange;
